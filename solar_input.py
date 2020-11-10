@@ -47,11 +47,17 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
     # FIXME: not done yet - DONE
+    star_param =[]
+    for i in line.split():
+        star_param.append(i)
+    star.R = int(star_param[1])
+    star.color = star_param[2]
+    star.m = int(normal_numbers(star_param[3]))
+    star.x = int(normal_numbers(star_param[4]))
+    star.y = int(normal_numbers(star_param[5]))
+    star.Vx = int(normal_numbers(star_param[6]))
+    star.Vy = int(normal_numbers(star_param[7]))
 
-    inp = open('solar_system.txt', 'r')
-    star_param = inp.readline(line)
-    star_param = star_param.rstrip()
-    inp.close()
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
@@ -70,10 +76,16 @@ def parse_planet_parameters(line, planet):
     """
     # FIXME: not done yet - DONE
 
-    inp = open('solar_system.txt', 'r')
-    planet_param = inp.readline(line)
-    planet_param = planet_param.rstrip()
-    inp.close()
+    star_param = []
+    for i in line.split():
+        star_param.append(i)
+    planet.R = int(star_param[1])
+    planet.color = star_param[2]
+    planet.m = int(normal_numbers(star_param[3]))
+    planet.x = int(normal_numbers(star_param[4]))
+    planet.y = int(normal_numbers(star_param[5]))
+    planet.Vx = int(normal_numbers(star_param[6]))
+    planet.Vy = int(normal_numbers(star_param[7]))
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -89,10 +101,20 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5), file = sys.stdout)
+            print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5), file=sys.stdout)
             # FIXME: should store real values
 
+
 # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
+
+def normal_numbers(line):
+    if "E" in line:
+        line_1 = line.split("E")
+        value = int(float(line_1[0]) * 10 ** int(line_1[1]))
+        return value
+    else:
+        return line
+
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
