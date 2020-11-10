@@ -30,7 +30,7 @@ def calculate_force(body, space_objects):
 def move_space_object(body, dt):
     """Перемещает тело в соответствии с действующей на него силой.
 
-    Параметры:
+    Параметры: 
 
     **body** — тело, которое нужно переместить.
     """
