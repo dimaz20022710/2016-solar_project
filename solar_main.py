@@ -2,8 +2,6 @@
 # license: GPLv3
 
 import tkinter
-import pygame
-from pygame import *
 from tkinter.filedialog import *
 import solar_vis as vis
 import solar_model as model
@@ -120,19 +118,15 @@ def main():
     global space
     global start_button
 
-    pygame.init()
-    pygame.font.init()
-
     print('Modelling started!')
     physical_time = 0
 
+    root = tkinter.Tk()
     # космическое пространство отображается на холсте типа Canvas
-    space = pygame.display.set_mode((vis.window_width, vis.window_height))
-    clock = pygame.time.Clock()
-    finished = False
-    FPS = 30
+    space = tkinter.Canvas(root, width=window_width, height=window_height, bg="black")
+    space.pack(side=tkinter.TOP)
     # нижняя панель с кнопками
-    frame = tkinter.Frame(space)
+    frame = tkinter.Frame(root)
     frame.pack(side=tkinter.BOTTOM)
 
     start_button = tkinter.Button(frame, text="Start", command=start_execution, width=6)
@@ -151,13 +145,6 @@ def main():
     load_file_button.pack(side=tkinter.LEFT)
     save_file_button = tkinter.Button(frame, text="Save to file...", command=save_file_dialog)
     save_file_button.pack(side=tkinter.LEFT)
-
-    '''
-    while not finished:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            
-    '''
 
     displayed_time = tkinter.StringVar()
     displayed_time.set(str(physical_time) + " seconds gone")
